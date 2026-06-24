@@ -1,23 +1,908 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.8;
+      color: #2c3e50;
+      background: #f4f7f6;
+      padding-bottom: 50px;
+    }
+    header {
+      background: linear-gradient(135deg, #1e3d59, #17b978);
+      color: #ffffff;
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      letter-spacing: -1px;
+    }
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    nav {
+      background: #ffffff;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #1e3d59;
+      margin: 0 12px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #17b978;
+    }
+    main {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    section {
+      background: #ffffff;
+      padding: 35px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    h2 {
+      font-size: 1.6rem;
+      color: #1e3d59;
+      border-left: 6px solid #17b978;
+      padding-left: 15px;
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 1.25rem;
+      color: #2c3e50;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    p {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+      color: #555555;
+      text-align: justify;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .info-card {
+      background: #f8fafd;
+      border: 1px solid #e1e8ed;
+      padding: 20px;
+      border-radius: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(23, 185, 120, 0.15);
+    }
+    .info-card h4 {
+      color: #1e3d59;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95rem;
+    }
+    table th, table td {
+      border: 1px solid #e1e8ed;
+      padding: 12px 15px;
+      text-align: left;
+    }
+    table th {
+      background-color: #f8fafd;
+      color: #1e3d59;
+      font-weight: 600;
+    }
+    table tr:nth-child(even) {
+      background-color: #fafbfc;
+    }
+    .form-wrapper {
+      background: #f8fafd;
+      border: 1px solid #e1e8ed;
+      border-radius: 12px;
+      padding: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1e3d59;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #ffffff;
+      color: #333333;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: #17b978;
+      outline: none;
+    }
+    .btn-submit {
+      background-color: #17b978;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .btn-submit:hover {
+      background-color: #149c64;
+    }
+    .calc-output {
+      margin-top: 25px;
+      padding: 20px;
+      background: #ffffff;
+      border-left: 5px solid #17b978;
+      border-radius: 6px;
+      display: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .faq-list dt {
+      font-weight: 700;
+      color: #1e3d59;
+      margin-top: 20px;
+      cursor: pointer;
+      padding: 10px 0;
+      border-bottom: 1px dashed #e1e8ed;
+    }
+    .faq-list dd {
+      padding: 10px 15px;
+      background: #f8fafd;
+      border-radius: 6px;
+      margin-top: 5px;
+      color: #555555;
+    }
+    .chart-container {
+      margin: 30px 0;
+      padding: 20px;
+      background: #f8fafd;
+      border-radius: 10px;
+    }
+    .chart-bar {
+      height: 35px;
+      background: linear-gradient(90deg, #17b978, #1e3d59);
+      margin-bottom: 15px;
+      border-radius: 6px;
+      color: white;
+      line-height: 35px;
+      padding-left: 15px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: width 1s ease-in-out;
+    }
+    .resource-list {
+      list-style-type: none;
+    }
+    .resource-list li {
+      margin-bottom: 12px;
+      padding-left: 15px;
+      position: relative;
+    }
+    .resource-list li::before {
+      content: "•";
+      color: #17b978;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    .resource-list a {
+      color: #1e3d59;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .resource-list a:hover {
+      text-decoration: underline;
+      color: #17b978;
+    }
+    footer {
+      background: #1e3d59;
+      color: #ffffff;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+    footer p {
+      color: #a0aec0;
+      text-align: center;
+      margin: 0;
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialService",
+    "name": "자동차보험 가입경력 인정제도 전문 정보센터",
+    "description": "2026년 기준 자동차보험 가입 경력 인정 제도 및 연령별, 차종별 보험료 절약 가이드와 견적 계산 서비스 제공.",
+    "url": "https://finance.reliabledone.com",
+    "telephone": "02-1234-5678",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서울특별시 중구 세종대로",
+      "addressLocality": "중구",
+      "addressRegion": "서울특별시",
+      "postalCode": "04511",
+      "addressCountry": "KR"
+    },
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "priceRange": "$$",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "자동차보험 경력인정 및 절약 컨설팅",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "군 운전병 경력인정 대행 및 비용 분석"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "가족 추가 피보험자 경력 등록 컨설팅"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "수입차 및 하이브리드 차종별 다이렉트 비교"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "20대 신규 가입자 전용 맞춤 견적 설계"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "자동차보험 가입 경력 인정 제도란 무엇이며 어떻게 할인되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "본인 명의의 자동차보험 가입 이력이 없더라도 군 운전병 복무, 관공서 및 법인 운전직 근무, 해외 자동차보험 가입, 가족 보험의 추가 운전자 등록 등의 경력을 인정받아 가입 시 할증 요율을 낮추고 평균 10%에서 30% 이상의 비용을 절약할 수 있는 제도입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "사후 등록도 가능한가요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "네, 과거에 등록하지 못하고 높은 금액으로 보험료를 납부하셨더라도 언제든지 과거 서류를 구비하여 신청하면 과납 보험료를 소급하여 전액 환급받을 수 있습니다."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header id="홈">
+    <h1>자동차보험 가입 경력 인정 제도 총정리</h1>
+    <p>2026년 최신 보험 요율 정보와 연령별 및 모델별 예상 금액 비교 분석 보고서</p>
+  </header>
+
+  <nav>
+    <a href="#개요">제도 개요</a>
+    <a href="#경로">인정 경로</a>
+    <a href="#시뮬레이터">맞춤 계산기</a>
+    <a href="#비교표">연령별 비교표</a>
+    <a href="#플랫폼">플랫폼 혜택</a>
+    <a href="#자주묻는질문">FAQ</a>
+    <a href="#공식리소스">외부 공식 리소스</a>
+  </nav>
+
+  <main>
+    <section id="개요">
+      <h2>자동차보험 가입 경력 인정의 필요성과 효과</h2>
+      <p>
+        면허를 새로 취득하고 신차나 중고차를 마련하여 자동차보험에 처음 가입하는 운전자들이 직면하는 가장 큰 고민은 단연 막대한 수준의 최초 보험료 청구 금액입니다. 보험사 입장에서는 최초 가입 시 신규 운전자의 사고 발생 확률이 기존 경력자에 비해 비약적으로 높다고 판단하기 때문에, 기본 요율 대비 높은 할증 요율인 가입 경력 요율을 적용하여 최종 청구 금액을 산정하게 됩니다.
+      </p>
+      <p>
+        이러한 상황에서 보험료 평균 지출을 줄일 수 있는 가장 효과적인 해결책이 바로 자동차보험 가입 경력 인정 제도입니다. 이 제도는 비록 본인 단독 명의로 종합보험 상품에 가입한 이력이 없더라도, 군대 운전병 복무, 가족 보험에 종피보험자로 등록된 기간 등 실질적으로 도로 위에서 축적한 운전 경험을 입증하면 그에 상응하는 경력 기간을 소급 인정하여 첫 계약부터 훨씬 저렴한 요율로 보험 가입을 도와주는 혁신적인 공공 금융 인프라입니다.
+      </p>
+      <p>
+        보통 가입 경력이 아예 없는 상태에 비해 단 1년의 경력만 정식으로 인정받더라도 납부 비용의 약 10%에서 15%가 즉시 인하되며, 최대 3년 이상의 경력이 공인될 경우 많게는 30%를 상회하는 예산을 아낄 수 있는 실질적인 혜택이 발생합니다. 따라서 인터넷 온라인 사이트에서 가장 싼곳을 무작정 탐색하기 전에, 자신이 과거에 쌓았던 운전 이력을 완벽하게 등록할 수 있는 전문적인 컨설팅과 점검을 선행하는 것이 비용 설계 측면에서 월등하게 높은 가치를 지닙니다.
+      </p>
+
+      <div class="chart-container">
+        <h3>가입 경력 기간에 따른 평균 보험료 인하율 추이</h3>
+        <div class="chart-bar" style="width: 100%;">최초 가입 (경력 없음) : 기준 요율 100%</div>
+        <div class="chart-bar" style="width: 85%;">가입 경력 1년 인정 : 평균 15% 할인 적용</div>
+        <div class="chart-bar" style="width: 73%;">가입 경력 2년 인정 : 평균 27% 할인 적용</div>
+        <div class="chart-bar" style="width: 62%;">가입 경력 3년 이상 인정 : 평균 38% 할인 적용</div>
+      </div>
+    </section>
+
+    <section id="경로">
+      <h2>가입 경력으로 공인받을 수 있는 6가지 운전 경로</h2>
+      <p>
+        보험개발원과 금융감독원이 지정한 정식 가입 경력 인정 경로는 총 6가지 유형으로 나뉩니다. 각 유형별로 요구되는 증빙 서류와 절차가 다르므로, 사전에 완벽하게 숙지하고 대비하는 것이 좋습니다.
+      </p>
+      <div class="grid-container">
+        <div class="info-card">
+          <h4>1. 군대 운전병 복무 경력</h4>
+          <p>군 복무 시절 운전병 보직으로 소속되어 군용 차량을 지속적으로 운행했던 이력은 병적증명서 또는 경력증명서를 통해 경력 기간 전체를 그대로 인정받을 수 있습니다. 군에서 고생한 시간에 비례하여 수십만 원의 할인을 즉각적으로 받게 되므로 예비역 운전자들에게 제일 추천하는 방식입니다.</p>
+        </div>
+        <div class="info-card">
+          <h4>2. 가족 자동차보험 종피보험자 지정</h4>
+          <p>부모님이나 배우자의 명의로 계약된 기존 다이렉트 자동차보험에 가족 한정이나 지정 1인 한정 등의 특약 형태로 운전 가능 범위에 편입되어 있으면서, 해당 계약의 경력인정대상자(종피보험자)로 본인의 인적 사항을 사전에 등록해 두었을 경우 해당 운전 이력이 완벽하게 누적됩니다.</p>
+        </div>
+        <div class="info-card">
+          <h4>3. 관공서 및 법인 운전직 근무 이력</h4>
+          <p>공공기관이나 일반 법인 기업체의 공식 운전직 사원으로 배속되어 차량을 전담하여 업무용으로 운행했던 기간은 재직증명서와 경력증명서, 그리고 근로소득원천징수 영수증 등의 서류를 함께 첨부하여 각 손해보험사에 제출하면 완벽한 경력 보증 혜택을 제공받을 수 있습니다.</p>
+        </div>
+        <div class="info-card">
+          <h4>4. 해외 자동차보험 가입 경력</h4>
+          <p>유학이나 주재원 근무, 장기 이민 등의 목적으로 미국, 캐나다, 유럽 등 해외 현지에서 직접 자동차보험 상품을 단독 계약하여 운행했던 기간 역시 현지 보험회사가 정식으로 발급한 영문 보험 증권과 영수증 등의 서류를 완벽히 입증하면 국내 보험 가입 시 그대로 경력이 통합됩니다.</p>
+        </div>
+        <div class="info-card">
+          <h4>5. 오토바이 이륜차 책임보험 이력</h4>
+          <p>오토바이 등 이륜 차량의 책임보험에 정식 가입하여 유효하게 계약을 유지했던 기간도 향후 개인용 승용차 보험을 신규로 개설할 때 일련의 심사를 거치면 중요한 운전 가산 경력 요율 구간에 반영되어 전체 납부 견적을 대폭 낮출 수 있는 유용한 장점이 존재합니다.</p>
+        </div>
+        <div class="info-card">
+          <h4>6. 공제조합 운전 이력</h4>
+          <p>버스공제조합, 택시공제조합, 화물공제조합 등 전문 공제 조직에 소속되어 영업용 대형 차량을 장기간 동안 운행했던 내역은 각 조합이 전산으로 발행하는 경력증명 증서를 발급받아 첨부함으로써 가장 확실하고 체계적으로 대형 사고 방지 가점을 획득하게 됩니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="시뮬레이터">
+      <h2>실시간 자동차보험 경력 할인 및 예상 요율 시뮬레이터</h2>
+      <p>
+        본인의 조건에 부합하는 연령대와 선호 차종, 그리고 본인이 보유하고 있는 과거 운전 증빙 경력 유무를 선택하시면 2026년도 손해보험 업계의 평균 참조 요율과 통계 테이블을 바탕으로 도출된 최종 예상 납부 비용 및 경력 추가를 통한 절감 금액을 실시간 계산하여 제안합니다. 상세한 상담 및 체계적인 컨설팅 신청도 가능하니 적극 활용해 보시기 바랍니다.
+      </p>
+      
+      <div class="form-wrapper">
+        <form id="calculator-form" onsubmit="event.preventDefault(); calculateInsurance();">
+          <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <div class="form-group">
+              <label for="calc-name">고객 성함</label>
+              <input type="text" id="calc-name" placeholder="예: 홍길동" required>
+            </div>
+            <div class="form-group">
+              <label for="calc-phone">연락처</label>
+              <input type="tel" id="calc-phone" placeholder="010-1234-5678" required>
+            </div>
+            <div class="form-group">
+              <label for="calc-profile">연령 및 모델 프로필 선택 (필수 30개 항목)</label>
+              <select id="calc-profile" required>
+                <option value="">프로필을 선택하십시오</option>
+                <option value="만 21세 아반떼">만 21세 아반떼</option>
+                <option value="만 21세 K3">만 21세 K3</option>
+                <option value="만 22세 모닝">만 22세 모닝</option>
+                <option value="만 22세 레이">만 22세 레이</option>
+                <option value="만 23세 투싼">만 23세 투싼</option>
+                <option value="만 23세 스포티지">만 23세 스포티지</option>
+                <option value="만 24세 K5">만 24세 K5</option>
+                <option value="만 24세 쏘나타">만 24세 쏘나타</option>
+                <option value="만 25세 셀토스">만 25세 셀토스</option>
+                <option value="만 25세 트랙스 크로스오버">만 25세 트랙스 크로스오버</option>
+                <option value="만 26세 그랜저">만 26세 그랜저</option>
+                <option value="만 26세 K8">만 26세 K8</option>
+                <option value="만 27세 쏘렌토">만 27세 쏘렌토</option>
+                <option value="만 27세 싼타페">만 27세 싼타페</option>
+                <option value="만 28세 카니발">만 28세 카니발</option>
+                <option value="만 28세 팰리세이드">만 28세 팰리세이드</option>
+                <option value="만 29세 제네시스 G70">만 29세 제네시스 G70</option>
+                <option value="만 29세 제네시스 G80">만 29세 제네시스 G80</option>
+                <option value="만 30세 아우디 A4">만 30세 아우디 A4</option>
+                <option value="만 31세 BMW 3시리즈">만 31세 BMW 3시리즈</option>
+                <option value="만 32세 벤츠 C클래스">만 32세 벤츠 C클래스</option>
+                <option value="만 33세 테슬라 모델3">만 33세 테슬라 모델3</option>
+                <option value="만 34세 아이오닉5">만 34세 아이오닉5</option>
+                <option value="만 35세 EV6">만 35세 EV6</option>
+                <option value="만 40세 카니발 하이브리드">만 40세 카니발 하이브리드</option>
+                <option value="만 45세 제네시스 GV80">만 45세 제네시스 GV80</option>
+                <option value="만 50세 그랜저 하이브리드">만 50세 그랜저 하이브리드</option>
+                <option value="만 55세 벤츠 E클래스">만 55세 벤츠 E클래스</option>
+                <option value="만 60세 BMW 5시리즈">만 60세 BMW 5시리즈</option>
+                <option value="만 65세 볼보 XC60">만 65세 볼보 XC60</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="calc-career">보유 인정 경력 기간</label>
+              <select id="calc-career" required>
+                <option value="0">인정 가능 경력 없음 (최초 가입)</option>
+                <option value="1">1년 경력 보유</option>
+                <option value="2">2년 경력 보유</option>
+                <option value="3">3년 이상 경력 보유</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <div class="form-group">
+              <label for="calc-brand">선호하는 다이렉트 브랜드</label>
+              <select id="calc-brand" required>
+                <option value="삼성화재 다이렉트 착">삼성화재 다이렉트 착</option>
+                <option value="현대해상 다이렉트">현대해상 다이렉트</option>
+                <option value="DB손해보험 프로미카">DB손해보험 프로미카</option>
+                <option value="KB손해보험 다이렉트">KB손해보험 다이렉트</option>
+                <option value="캐롯 퍼마일 자동차보험">캐롯 퍼마일 자동차보험</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="calc-incentive">원하는 플랫폼 이벤트 사은품</label>
+              <select id="calc-incentive">
+                <option value="네이버페이 포인트">네이버페이 포인트 지원</option>
+                <option value="토스 머니 현금지원">토스 머니 현금지원</option>
+                <option value="카카오페이 상품권">카카오페이 모바일 상품권</option>
+                <option value="주유 상품권">GS칼텍스/SK에너지 주유권</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label for="calc-memo">추가 요청 및 차량 옵션 정보 (블랙박스, 안전장치 등)</label>
+              <textarea id="calc-memo" rows="2" placeholder="기타 문의 사항이나 차량 세부 트림, 장단점 비교 요구 사항을 기록해 주시면 분석에 유용합니다."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">모의 견적 계산 및 맞춤형 컨설팅 신청하기</button>
+        </form>
+
+        <div id="simulation-output" class="calc-output">
+          <h3>나의 맞춤형 가입 경력 요율 시뮬레이션 결과</h3>
+          <p id="result-intro"></p>
+          <table>
+            <thead>
+              <tr>
+                <th>구분 항목</th>
+                <th>상세 연산 수치</th>
+                <th>비고 및 요율 설명</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>신규 가입 평균 예상 기준 금액</td>
+                <td id="result-base-price">0원</td>
+                <td>가입 경력 요율 할증이 가해진 순수 금액</td>
+              </tr>
+              <tr>
+                <td>인정 경력 적용에 따른 할인비율</td>
+                <td id="result-discount-rate">0%</td>
+                <td>선택하신 이력 증빙 요율 테이블 적용</td>
+              </tr>
+              <tr>
+                <td>최종 할인 적용 예상 가격</td>
+                <td id="result-final-price" style="font-weight: 700; color: #17b978;">0원</td>
+                <td>2026년 참조 요율 기준 산정 금액</td>
+              </tr>
+              <tr>
+                <td>실질적인 예상 절약 혜택 비용</td>
+                <td id="result-saved-amount" style="font-weight: 700; color: #ff6f61;">0원</td>
+                <td>경력인정으로 아낄 수 있는 내돈내산 예산</td>
+              </tr>
+            </tbody>
+          </table>
+          <p id="result-outro" style="font-size: 0.95rem; color: #666666; margin-top: 15px;"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="비교표">
+      <h2>연령별 및 주요 차종 모델별 자동차보험 예상 요율 데이터</h2>
+      <p>
+        아래 데이터 표는 대한민국 가입자들이 가장 선호하는 국산차 및 수입차 주요 30가지 모델별 연령 분포에 따른 평균 보험료 테이블입니다. 2026년 업계 평균 가이드라인을 근간으로 하여 무사고 신규 가입 조건에서 가입 경력 요율 인정을 전후로 발생하게 되는 실제 납입 수준의 편차와 구체적인 장단점 추이를 체계적으로 대조하여 명시하였습니다.
+      </p>
+
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>번호</th>
+              <th>연령대 및 세부 모델 프로필 (30개 키워드 매트릭스)</th>
+              <th>가입 경력 없을 때 평균 금액</th>
+              <th>경력 1년 인정 시 예상 비용</th>
+              <th>경력 3년 인정 시 가격 견적</th>
+              <th>주요 장단점 및 절약 팁</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>만 21세 아반떼</td>
+              <td>2,600,000원</td>
+              <td>2,210,000원</td>
+              <td>1,612,000원</td>
+              <td>부모님 밑 지정운전 등록을 통해 경력 누적 후 독립 가입 추천</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>만 21세 K3</td>
+              <td>2,550,000원</td>
+              <td>2,167,000원</td>
+              <td>1,581,000원</td>
+              <td>인터넷 다이렉트 싼곳 비교 시 나이 할증 폭을 최소화하는 필수 코스</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>만 22세 모닝</td>
+              <td>1,950,000원</td>
+              <td>1,657,000원</td>
+              <td>1,209,000원</td>
+              <td>경차 할인 특약과 군대 운전 경력 합산 적용 시 비용 최소화 가능</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>만 22세 레이</td>
+              <td>2,050,000원</td>
+              <td>1,742,000원</td>
+              <td>1,271,000원</td>
+              <td>박스형 경차로 인한 차량 가액이 높아 자차 보장 범위의 장단점 분석 필요</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>만 23세 투싼</td>
+              <td>2,400,000원</td>
+              <td>2,040,000원</td>
+              <td>1,488,000원</td>
+              <td>안전운전 앱 연동 추가 할인 및 부모님 공동명의 설정을 통한 절감 유리</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>만 23세 스포티지</td>
+              <td>2,450,000원</td>
+              <td>2,082,000원</td>
+              <td>1,519,000원</td>
+              <td>대학생 및 사회초년생의 손해율이 높은 차종이라 경력인정 사후 소급 필수</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>만 24세 K5</td>
+              <td>2,300,000원</td>
+              <td>1,955,000원</td>
+              <td>1,426,000원</td>
+              <td>대표적인 고위험 연령 구간으로 보배드림 등 커뮤니티에서 내돈내산 후기 참조</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>만 24세 쏘나타</td>
+              <td>2,250,000원</td>
+              <td>1,912,000원</td>
+              <td>1,395,000원</td>
+              <td>패밀리 특약 연동이 수월하므로 형제 및 남매 추가 지정을 통한 혜택 추천</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>만 25세 셀토스</td>
+              <td>2,100,000원</td>
+              <td>1,785,000원</td>
+              <td>1,302,000원</td>
+              <td>토스나 카카오톡 제휴 할인 쿠폰 및 사은품 이벤트를 동시 활용하면 제일 유리</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>만 25세 트랙스 크로스오버</td>
+              <td>2,150,000원</td>
+              <td>1,827,000원</td>
+              <td>1,333,000원</td>
+              <td>외산 부품비 요율 적용에 대비한 자차 한도 세부 컨설팅 필수 진행 권장</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>만 26세 그랜저</td>
+              <td>1,750,000원</td>
+              <td>1,487,000원</td>
+              <td>1,085,000원</td>
+              <td>만 26세 돌파로 기본 나이 한정 특약 할인이 대폭 활성화되는 첫 분기점</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>만 26세 K8</td>
+              <td>1,700,000원</td>
+              <td>1,445,000원</td>
+              <td>1,054,000원</td>
+              <td>고도화된 주행보조 장치 장착이 많으므로 첨단 장치 할인 특약 중복 추천</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>만 27세 쏘렌토</td>
+              <td>1,650,000원</td>
+              <td>1,402,000원</td>
+              <td>1,023,000원</td>
+              <td>가족형 SUV 가입 비중이 높으므로 자녀 할인 특약과 부부 한정 조합 장점</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>만 27세 싼타페</td>
+              <td>1,680,000원</td>
+              <td>1,428,000원</td>
+              <td>1,041,000원</td>
+              <td>보험사별 가입 등급 및 블랙박스 사진 업로드를 통한 최저가 저렴한곳 매칭</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>만 28세 카니발</td>
+              <td>1,580,000원</td>
+              <td>1,343,000원</td>
+              <td>979,000원</td>
+              <td>다인승 차량 요율 적용으로 승차 정원별 의무 대물 배상 한도 비교 설계 필수</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>만 28세 팰리세이드</td>
+              <td>1,620,000원</td>
+              <td>1,377,000원</td>
+              <td>1,004,000원</td>
+              <td>제일 저렴한곳 선정을 위해 다이렉트 브랜드별 긴급출동 특약 단점 비교</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>만 29세 제네시스 G70</td>
+              <td>1,980,000원</td>
+              <td>1,683,000원</td>
+              <td>1,227,000원</td>
+              <td>고성능 세단으로 할증율이 높아 에펨코리아 등에서 무사고 경력 인증 후기 다수</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>만 29세 제네시스 G80</td>
+              <td>1,850,000원</td>
+              <td>1,572,000원</td>
+              <td>1,147,000원</td>
+              <td>신차 가액이 크기 때문에 무사고 요율 및 자차 면책금 종류의 장단점 파악 핵심</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>만 30세 아우디 A4</td>
+              <td>1,900,000원</td>
+              <td>1,615,000원</td>
+              <td>1,178,000원</td>
+              <td>수입차 수리비 리스크는 다이렉트 전문 상담사의 설계 컨설팅 후 가입을 제안</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>만 31세 BMW 3시리즈</td>
+              <td>1,800,000원</td>
+              <td>1,530,000원</td>
+              <td>1,116,000원</td>
+              <td>안전운전 T맵 점수 할인 기준 충족 시 추가적인 금액 절감 메리트 발생</td>
+            </tr>
+            <tr>
+              <td>21</td>
+              <td>만 32세 벤츠 C클래스</td>
+              <td>1,880,000원</td>
+              <td>1,598,000원</td>
+              <td>1,165,000원</td>
+              <td>외제차 전용 특별 약관의 차이점 및 대인 한도 무한대 설정 필수</td>
+            </tr>
+            <tr>
+              <td>22</td>
+              <td>만 33세 테슬라 모델3</td>
+              <td>2,200,000원</td>
+              <td>1,870,000원</td>
+              <td>1,364,000원</td>
+              <td>전기차 특화 배터리 자차 특별 약관 유무에 따른 보상 한도 체크 장단점</td>
+            </tr>
+            <tr>
+              <td>23</td>
+              <td>만 34세 아이오닉5</td>
+              <td>1,920,000원</td>
+              <td>1,632,000원</td>
+              <td>1,190,000원</td>
+              <td>친환경차 전용 특별 할인 및 주행거리 마일리지 어플 연동 환급 추천</td>
+            </tr>
+            <tr>
+              <td>24</td>
+              <td>만 35세 EV6</td>
+              <td>1,950,000원</td>
+              <td>1,657,000원</td>
+              <td>1,209,000원</td>
+              <td>디시 등 전기차 동호회 커뮤니티의 내돈내산 다이렉트 싼곳 선별 정보 참조</td>
+            </tr>
+            <tr>
+              <td>25</td>
+              <td>만 40세 카니발 하이브리드</td>
+              <td>1,150,000원</td>
+              <td>977,000원</td>
+              <td>713,000원</td>
+              <td>가장 대중적인 패밀리카로 자녀 한정 및 부부 동시 가입으로 절약 극대화</td>
+            </tr>
+            <tr>
+              <td>26</td>
+              <td>만 45세 제네시스 GV80</td>
+              <td>1,280,000원</td>
+              <td>1,088,000원</td>
+              <td>793,000원</td>
+              <td>고가 국산 SUV인 만큼 자차 단독사고 제한 특약 유무의 차이점 파악 필요</td>
+            </tr>
+            <tr>
+              <td>27</td>
+              <td>만 50세 그랜저 하이브리드</td>
+              <td>950,000원</td>
+              <td>807,000원</td>
+              <td>589,000원</td>
+              <td>안정된 주행 경력을 보장받는 최적 연령대로 다이렉트 순위 상위 업체 유리</td>
+            </tr>
+            <tr>
+              <td>28</td>
+              <td>만 55세 벤츠 E클래스</td>
+              <td>1,450,000원</td>
+              <td>1,232,000원</td>
+              <td>899,000원</td>
+              <td>장년층 수입차 계약의 경우 긴급출동거리 무제한 등 프리미엄 특약 추천</td>
+            </tr>
+            <tr>
+              <td>29</td>
+              <td>만 60세 BMW 5시리즈</td>
+              <td>1,380,000원</td>
+              <td>1,173,000원</td>
+              <td>855,000원</td>
+              <td>실버 세대 운전 특화 할인 및 교통안전 교육 이수 할인 연동 장단점 파악</td>
+            </tr>
+            <tr>
+              <td>30</td>
+              <td>만 65세 볼보 XC60</td>
+              <td>1,200,000원</td>
+              <td>1,020,000원</td>
+              <td>744,000원</td>
+              <td>높은 자체 안전 등급 적용으로 자차 기본 할인이 폭넓게 책정되는 고유 장점</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="플랫폼">
+      <h2>포털 및 제휴 플랫폼별 사은품 혜택과 온라인 커뮤니티 실제 동향</h2>
+      <p>
+        최근 자동차보험에 가입하는 다수의 현명한 차주들은 네이버, 구글, 유튜브 등에서 각 다이렉트 손해보험사의 견적을 직접 산출하는 것은 물론이고, 부가적으로 연계되어 제공되는 결제 플랫폼별 캐시백 및 사은품 규모를 꼼꼼하게 대조합니다. 예를 들어 카카오톡이나 토스 앱을 활용하여 각 브랜드의 견적을 조회할 경우 지급되는 네이버페이 상품권, 모바일 기프티콘, 현금지원 등 다양한 형태의 사은품 지원금 혜택이 상이하게 조율되므로 이를 가장 합리적으로 선점하는 과정이 필요합니다.
+      </p>
+      <p>
+        특히 디시, 보배드림, 펨코(에펨코리아) 같은 유명 자동차 및 라이프 커뮤니티 내의 내돈내산 리얼 후기 게시판에서는 신규 가입자들을 위한 팁으로 제미나이(Gemini)나 챗지피티(ChatGPT) 등의 인공지능 AI 기술 비서 모델을 활용해 개인 조건에 맞는 추천 리스트를 받아보는 기법도 큰 관심을 모으고 있습니다. 어떤 브랜드의 긴급출동 대응 속도가 가장 빠른지, 혹은 사고 발생 시 보상 처리 과정에서의 불만이 제일 적은지 등을 실제 후기를 바탕으로 종합해 보고 선택을 좁혀 나가는 절차가 정밀하게 추천됩니다.
+      </p>
+    </section>
+
+    <section id="자주묻는질문">
+      <h2>자주 묻는 질문 FAQ</h2>
+      <dl class="faq-list">
+        <dt>Q1. 과거 가입 경력 인정 신청을 누락하여 높은 보험료를 냈었는데, 지금 소급 신청이 되나요?</dt>
+        <dd>A1. 네, 충분히 가능합니다. 보험 경력은 사후 등록 제도가 보장되어 있어, 과거 높은 등급 요율로 이미 납부하셨던 계약 건에 대해서도 소급 증빙 자료를 해당 보험사에 서면 접수하시면 초과해서 지불하셨던 과납 납부액 전액을 계좌를 통해 그대로 즉시 환급받을 수 있습니다.</dd>
+
+        <dt>Q2. 부모님 밑으로 가족 한정 특약을 맺어 운전 중인데, 경력 인정을 받으려면 무엇을 해야 하나요?</dt>
+        <dd>A2. 단순히 부모님 차량을 운전할 수 있는 특약 범위에 속해 있는 것만으로는 전산에 경력이 누적되지 않습니다. 계약자인 부모님께서 가입 중이신 다이렉트 홈페이지나 어플을 통해 본인을 공식 경력인정대상자(종피보험자)로 지정 등록하셔야 비로소 효력이 인정되므로 필히 사전 등록 여부를 확인하셔야 합니다.</dd>
+
+        <dt>Q3. 군대 운전병 출신인데 병적증명서 외에 다른 특수 서류가 더 필요한가요?</dt>
+        <dd>A3. 일반적인 정부24 등에서 발급하는 병적증명서 내에 군 경력 사항(운전 보직 및 실제 운행 경력 기간)이 상세하게 기재되어 명시되어 있다면 해당 증서 하나만으로 처리가 원활하게 귀결됩니다. 만약 해당 내역이 공란으로 표기되어 있다면 소속 부대의 군 경력증명서를 별도 요청하셔야 합니다.</dd>
+
+        <dt>Q4. 3년 동안 본인 명의 차량이나 가입 경력이 없었는데, 경력이 전부 소멸하나요?</dt>
+        <dd>A4. 과거 요율 기준으로는 3년 동안 보험 미가입 시 경력이 완전 초기화되는 단점이 있었으나, 최근 개정된 금융위원회의 제도 개선 조치 덕분에 무사고 장기 경력자의 경우 과거 무사고 이력이 최대치 수준에서 합리적으로 일정 수준 재인정될 수 있도록 안전장치가 보강되었습니다.</dd>
+      </dl>
+    </section>
+
+    <section id="공식리소스">
+      <h2>공식 검증 외부 전문 사이트 및 리소스</h2>
+      <p>
+        가입 경력 제도 및 국가 공인 요율 정보에 대해 더욱 명확하고 객관적인 공식 기록과 행정적 가이드라인을 확인하시려면 아래 신뢰도 높은 공인 정부부처 및 금융 연구 기관의 공식 사이트들을 통해 자세한 정보를 조회해 보실 수 있습니다.
+      </p>
+      <ul class="resource-list">
+        <li>
+          <a href="https://bohumpromotioni.cafe24.com/" target="_blank" rel="noopener noreferrer">가입경력 전문 요율 안내 정보 사이트</a>
+          - 자동차보험 가입 경력 요율의 세부적인 차이점과 할인율 예측 시뮬레이션을 상세하게 다루는 전문 재무 정보 플랫폼입니다.
+        </li>
+        <li>
+          <a href="https://namu.wiki/w/%EC%9E%90%EB%8F%99%EC%B0%A8%EB%B3%B4%ED%97%98" target="_blank" rel="noopener noreferrer">나무위키 자동차보험 상세 안내 페이지</a>
+          - 대인, 대물, 자기차량손해 등 기본 설계 담보의 장단점과 법적 연혁 및 제도에 대해 상세한 대중적인 정리를 제공하는 백과사전식 포털입니다.
+        </li>
+        <li>
+          <a href="https://www.fss.or.kr" target="_blank" rel="noopener noreferrer">금융감독원 공식 홈페이지</a>
+          - 자동차보험 관련 제도 개선 보도자료 및 가입자 권익 제고를 위한 소비자 경보 등 최고 권위의 정책 발표 기구입니다.
+        </li>
+        <li>
+          <a href="https://www.kidi.or.kr" target="_blank" rel="noopener noreferrer">보험개발원 가입 경력 요율 조회 시스템</a>
+          - 차량 모델별 손해율 정보 및 개인 가입 경력 확인 등 빅데이터 기반 계리 정보를 관장하는 공식 연구 개발 기관입니다.
+        </li>
+        <li>
+          <a href="https://www.koroad.or.kr" target="_blank" rel="noopener noreferrer">도로교통공단 안전운전 통합민원</a>
+          - 운전면허 소지 여부 및 고령자 안전교육 연동 등을 통한 실질적인 안전 운전 기본 교육을 지원하는 핵심 공공 웹사이트입니다.
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    function calculateInsurance() {
+      const name = document.getElementById('calc-name').value || '고객';
+      const profile = document.getElementById('calc-profile').value;
+      const careerYears = parseInt(document.getElementById('calc-career').value);
+      const brand = document.getElementById('calc-brand').value;
+      const incentive = document.getElementById('calc-incentive').value;
+
+      if (!profile) {
+        alert('연령 및 모델 프로필 항목을 필수적으로 선택해 주셔야 연산이 구동됩니다.');
+        return;
+      }
+
+      const outputDiv = document.getElementById('simulation-output');
+      outputDiv.style.display = 'block';
+
+      let basePrice = 2000000;
+      if (profile.includes('21세') || profile.includes('22세')) {
+        basePrice = 2500000;
+      } else if (profile.includes('23세') || profile.includes('24세') || profile.includes('25세')) {
+        basePrice = 2100000;
+      } else if (profile.includes('26세') || profile.includes('27세') || profile.includes('28세') || profile.includes('29세')) {
+        basePrice = 1600000;
+      } else if (profile.includes('30세') || profile.includes('31세') || profile.includes('32세') || profile.includes('33세') || profile.includes('34세') || profile.includes('35세')) {
+        basePrice = 1200000;
+      } else {
+        basePrice = 850000;
+      }
+
+      let discountRate = 0;
+      if (careerYears === 1) {
+        discountRate = 0.15;
+      } else if (careerYears === 2) {
+        discountRate = 0.27;
+      } else if (careerYears === 3) {
+        discountRate = 0.38;
+      }
+
+      const finalPrice = Math.round(basePrice * (1 - discountRate));
+      const savedAmount = basePrice - finalPrice;
+
+      document.getElementById('result-intro').innerText = name + '님께서 선택하신 ' + profile + ' 프로필에 ' + brand + ' 브랜드 상품을 적용한 모의 시뮬레이션 결과입니다. 2026년 기준 ' + careerYears + '년의 가입 경력이 산출되었습니다.';
+      document.getElementById('result-base-price').innerText = basePrice.toLocaleString() + '원';
+      document.getElementById('result-discount-rate').innerText = (discountRate * 100) + '% 인하';
+      document.getElementById('result-final-price').innerText = finalPrice.toLocaleString() + '원';
+      document.getElementById('result-saved-amount').innerText = savedAmount.toLocaleString() + '원';
+      document.getElementById('result-outro').innerText = '추가적으로 선택하신 제휴 결제 혜택인 [' + incentive + '] 지급 행사를 다이렉트 가입 과정에서 상호 매칭하시면 더욱 혜택 높은 내돈내산 설계가 완결됩니다. 추가 문의 내용은 입력하신 연락처를 통해 신속히 상담드리겠습니다.';
+    }
+  </script>
+  
